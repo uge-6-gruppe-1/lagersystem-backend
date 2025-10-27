@@ -2,9 +2,9 @@
 {
     string ID { get; set; }
     string? UserID { get; set; }
-    List<CartItem> Items { get; set; }
+    List<OrderLine> Items { get; set; }
 
-    public ProductList(string id, string? userID, List<CartItem> items)
+    public ProductList(string id, string? userID, List<OrderLine> items)
     {
         ID = id;
         UserID = userID;
