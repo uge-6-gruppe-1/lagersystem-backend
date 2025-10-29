@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Domain.Interfaces.Repositories;
-using Backend.Domain.Entities;
 using Backend.Infrastructure.Persistence.Contexts;
 using Backend.Application.Mappers;
 using Backend.Application.DTOs;
@@ -77,9 +76,12 @@ namespace Backend.Infrastructure.Persistence.Repositories
       return true;
     }
 
-    public async Task<bool> Exists(Guid id)
+    public async Task<IEnumerable<ProductDto>> GetByCategoryId(Guid categoryId)
     {
-      return await _context.Product.AnyAsync(p => p.Id == id);
+      return await _context.Product
+        .Where(p => p.Categories.Any(c => c.Id == categoryId))
+        .Select(p => p.ToDto())
+        .ToListAsync();
     }
   }
 }

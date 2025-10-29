@@ -17,11 +17,6 @@ namespace Backend.Application.Mappers
       );
     }
 
-    public static IEnumerable<ProductDto> ToDtos(this IEnumerable<Product> products)
-    {
-      return products.Select(p => p.ToDto());
-    }
-
     public static Product ToEntity(this ProductDto productAppDto)
     {
       return new Product
@@ -32,11 +27,6 @@ namespace Backend.Application.Mappers
         Price = productAppDto.Price.Amount,
         ImagePath = productAppDto.ImagePath ?? string.Empty
       };
-    }
-
-    public static IEnumerable<Product> ToEntities(this IEnumerable<ProductDto> productAppDtos)
-    {
-      return productAppDtos.Select(dto => dto.ToEntity());
     }
 
     public static ProductDto ToDto(this ProductCreateDto createDto)

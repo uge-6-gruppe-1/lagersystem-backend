@@ -20,6 +20,7 @@ namespace Backend.Controllers
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
       var productDtos = await _productService.GetAll();
+      // Return 200 with products
       return Ok(productDtos);
     }
 
@@ -28,10 +29,9 @@ namespace Backend.Controllers
     public async Task<ActionResult<ProductDto>> GetProduct(Guid id)
     {
       var productDto = await _productService.GetById(id);
-      if (productDto == null)
-      {
-        return NotFound($"Product with ID {id} not found.");
-      }
+      // Return 404 if not found
+      if (productDto == null) return NotFound($"Product with ID {id} not found.");
+      // Return 200 with product
       return Ok(productDto);
     }
 
@@ -39,30 +39,23 @@ namespace Backend.Controllers
     [HttpPost]
     public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] ProductCreateDto productCreateDto)
     {
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
+      // Return 400 if request validation fails
+      if (!ModelState.IsValid) return BadRequest(ModelState);
       var createdProduct = await _productService.Create(productCreateDto);
+      // Return 201 with location header
       return CreatedAtAction(nameof(GetProduct), new { id = createdProduct.Id }, createdProduct);
     }
 
     // PATCH: api/products/
     [HttpPatch]
-    public async Task<ActionResult<ProductDto>> UpdateProduct([FromBody] ProductUpdateDto request)
+    public async Task<ActionResult<ProductDto>> UpdateProduct([FromBody] ProductUpdateDto productUpdateDto)
     {
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      var updatedProduct = await _productService.Update(request);
-      if (updatedProduct == null)
-      {
-        return NotFound($"Product with ID {request.Id} not found.");
-      }
-
+      // Return 400 if request validation fails
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      var updatedProduct = await _productService.Update(productUpdateDto);
+      // Return 404 if not found
+      if (updatedProduct == null) return NotFound($"Product with ID {productUpdateDto.Id} not found.");
+      // Return 200 with updated product
       return Ok(updatedProduct);
     }
 
@@ -71,11 +64,9 @@ namespace Backend.Controllers
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
       var deleted = await _productService.Delete(id);
-      if (!deleted)
-      {
-        return NotFound($"Product with ID {id} not found.");
-      }
-
+      // Return 404 if not found
+      if (!deleted) return NotFound($"Product with ID {id} not found.");
+      // Return 204 No Content on successful deletion
       return NoContent();
     }
   }
