@@ -1,7 +1,6 @@
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Domain.Interfaces.Services;
 using Backend.Application.DTOs;
-using Backend.Application.Mappers;
 
 namespace Backend.Application.Services
 {
@@ -20,11 +19,6 @@ namespace Backend.Application.Services
       return createdProductDto;
     }
 
-    public async Task<bool> Delete(Guid id)
-    {
-      return await _productRepository.Delete(id);
-    }
-
     public async Task<IEnumerable<ProductDto>> GetAll()
     {
       var productDtos = await _productRepository.GetAll();
@@ -41,6 +35,11 @@ namespace Backend.Application.Services
     {
       var updatedProductDto = await _productRepository.Update(productUpdateDto);
       return updatedProductDto;
+    }
+    
+    public async Task<bool> Delete(Guid id)
+    {
+      return await _productRepository.Delete(id);
     }
   }
 }
