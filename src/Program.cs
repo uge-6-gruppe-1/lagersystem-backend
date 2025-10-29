@@ -13,15 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add Entity Framework with PostgreSQL
-var dbHost = Environment.GetEnvironmentVariable("DB_HOST") 
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST")
     ?? throw new InvalidOperationException("DB_HOST environment variable is not set.");
-var dbPort = Environment.GetEnvironmentVariable("DB_PORT") 
+var dbPort = Environment.GetEnvironmentVariable("DB_PORT")
     ?? throw new InvalidOperationException("DB_PORT environment variable is not set.");
-var dbName = Environment.GetEnvironmentVariable("DB_NAME") 
+var dbName = Environment.GetEnvironmentVariable("DB_NAME")
     ?? throw new InvalidOperationException("DB_NAME environment variable is not set.");
-var dbUser = Environment.GetEnvironmentVariable("DB_USER") 
+var dbUser = Environment.GetEnvironmentVariable("DB_USER")
     ?? throw new InvalidOperationException("DB_USER environment variable is not set.");
-var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") 
+var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD")
     ?? throw new InvalidOperationException("DB_PASSWORD environment variable is not set.");
 
 var connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPassword}";
@@ -56,7 +56,7 @@ using (var scope = app.Services.CreateScope())
         try
         {
             logger.LogInformation("Attempting to connect to database (attempt {RetryCount}/{MaxRetries})", retryCount + 1, maxRetries);
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
             logger.LogInformation("Successfully connected to database and ensured it exists");
             break;
         }
