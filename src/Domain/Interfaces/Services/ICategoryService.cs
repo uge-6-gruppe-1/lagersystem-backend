@@ -9,7 +9,6 @@ namespace Backend.Domain.Interfaces.Services
     Task<CategoryDto?> GetById(Guid id);
     Task<CategoryDto?> Update(CategoryUpdateDto categoryUpdateDto);
     Task<bool> Delete(Guid id);
-    Task<IEnumerable<ProductDto>> GetProductsByCategoryId(Guid categoryId);
     Task<bool> AddProductToCategory(Guid categoryId, Guid productId);
     Task<bool> RemoveProductFromCategory(Guid categoryId, Guid productId);
   }

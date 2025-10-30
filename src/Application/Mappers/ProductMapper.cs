@@ -13,20 +13,33 @@ namespace Backend.Application.Mappers
         product.Name,
         product.Description,
         new Price(product.Price, "DKK"), // TODO: Replace hardcoded currency when multi-currency is supported
-        product.ImagePath
+        product.ImagePath,
+        null // Inventory not included by default
       );
     }
 
-    public static Product ToEntity(this ProductDto productAppDto)
+    public static Product ToEntity(this ProductDto productDto)
     {
       return new Product
       {
-        Id = productAppDto.Id,
-        Name = productAppDto.Name,
-        Description = productAppDto.Description,
-        Price = productAppDto.Price.Amount,
-        ImagePath = productAppDto.ImagePath ?? string.Empty
+        Id = productDto.Id,
+        Name = productDto.Name,
+        Description = productDto.Description,
+        Price = productDto.Price.Amount,
+        ImagePath = productDto.ImagePath ?? string.Empty
       };
+    }
+
+    public static ProductDto PopulateInventory(this ProductDto productDto, IEnumerable<InventoryEntryDto> inventoryEntries)
+    {
+      return new ProductDto(
+        productDto.Id,
+        productDto.Name,
+        productDto.Description,
+        productDto.Price,
+        productDto.ImagePath,
+        inventoryEntries
+      );
     }
 
     public static ProductDto ToDto(this ProductCreateDto createDto)
@@ -36,7 +49,8 @@ namespace Backend.Application.Mappers
         createDto.Name,
         createDto.Description,
         createDto.Price,
-        createDto.ImagePath
+        createDto.ImagePath,
+        null // No inventory on creation
       );
     }
 
