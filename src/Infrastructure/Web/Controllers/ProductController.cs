@@ -43,7 +43,7 @@ namespace Backend.Controllers
       if (!ModelState.IsValid) return BadRequest(ModelState);
       var createdProduct = await _productService.Create(productCreateDto);
       // Return 201 with location header
-      return CreatedAtAction(nameof(GetProduct), new { id = createdProduct.Id }, createdProduct);
+      return CreatedAtAction(nameof(GetProduct), new { productId = createdProduct.Id }, createdProduct);
     }
 
     // PATCH: api/products/

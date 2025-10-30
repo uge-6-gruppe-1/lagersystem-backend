@@ -6,7 +6,7 @@ namespace Backend.Application.DTOs
   public record ProductCreateDto(
     [Required] string Name,
     [Required] string Description,
-    [Required] Price Price,
+    [Required] decimal Price,
     string? ImagePath
   )
   { }

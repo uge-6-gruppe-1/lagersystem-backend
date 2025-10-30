@@ -48,7 +48,7 @@ namespace Backend.Application.Mappers
         Guid.NewGuid(),
         createDto.Name,
         createDto.Description,
-        createDto.Price,
+        new Price(createDto.Price, "DKK"), // TODO: Replace hardcoded currency when multi-currency is supported
         createDto.ImagePath,
         null // No inventory on creation
       );
@@ -58,7 +58,7 @@ namespace Backend.Application.Mappers
     {
       existingProduct.Name = updateDto.Name ?? existingProduct.Name;
       existingProduct.Description = updateDto.Description ?? existingProduct.Description;
-      existingProduct.Price = updateDto.Price?.Amount ?? existingProduct.Price;
+      existingProduct.Price = updateDto.Price ?? existingProduct.Price;
       existingProduct.ImagePath = updateDto.ImagePath ?? existingProduct.ImagePath;
       return existingProduct;
     }

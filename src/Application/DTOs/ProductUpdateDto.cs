@@ -7,7 +7,7 @@ namespace Backend.Application.DTOs
     [Required] Guid? Id,
     string? Name,
     string? Description,
-    Price? Price,
+    decimal? Price,
     string? ImagePath
   )
   { }
