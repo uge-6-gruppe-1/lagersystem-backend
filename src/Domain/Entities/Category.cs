@@ -12,6 +12,6 @@ namespace Backend.Domain.Entities
 
     public string Description { get; set; } = string.Empty;
 
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    public virtual ICollection<Product> Products { get; set; } = [];
   }
 }

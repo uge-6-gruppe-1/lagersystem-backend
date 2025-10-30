@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Domain.Entities
 {
-  public class Location
+  public class User
   {
     [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -10,6 +10,7 @@ namespace Backend.Domain.Entities
     [Required]
     public string Name { get; set; } = string.Empty;
 
-    public virtual ICollection<InventoryEntry> InventoryEntries { get; set; } = [];
+    [Required]
+    public string PasswordHash { get; set; } = string.Empty;
   }
 }

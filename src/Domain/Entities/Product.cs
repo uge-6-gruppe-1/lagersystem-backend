@@ -18,8 +18,8 @@ namespace Backend.Domain.Entities
 
     public string ImagePath { get; set; } = string.Empty;
 
-    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+    public virtual ICollection<Category> Categories { get; set; } = [];
     
-    public virtual ICollection<InventoryEntry> InventoryEntries { get; set; } = new List<InventoryEntry>();
+    public virtual ICollection<InventoryEntry> InventoryEntries { get; set; } = [];
   }
 }
