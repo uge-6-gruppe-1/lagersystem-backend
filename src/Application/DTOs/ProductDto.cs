@@ -8,8 +8,8 @@ namespace Backend.Application.DTOs
     [Required] string Name,
     [Required] string Description,
     [Required] Price Price,
-    string? ImagePath
-    //, IEnumerable<InventoryDTO> Inventory // TODO: Add Inventory when InventoryDTO is defined
-    )
+    string? ImagePath,
+    IEnumerable<InventoryEntryDto>? Inventory
+  )
   { }
 }

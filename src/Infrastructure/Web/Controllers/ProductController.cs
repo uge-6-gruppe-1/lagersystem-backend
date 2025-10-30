@@ -24,13 +24,13 @@ namespace Backend.Controllers
       return Ok(productDtos);
     }
 
-    // GET: api/products/{id}
-    [HttpGet("{id}")]
-    public async Task<ActionResult<ProductDto>> GetProduct(Guid id)
+    // GET: api/products/{productId}
+    [HttpGet("{productId}")]
+    public async Task<ActionResult<ProductDto>> GetProduct(Guid productId)
     {
-      var productDto = await _productService.GetById(id);
+      var productDto = await _productService.GetById(productId);
       // Return 404 if not found
-      if (productDto == null) return NotFound($"Product with ID {id} not found.");
+      if (productDto == null) return NotFound($"Product with ID {productId} not found.");
       // Return 200 with product
       return Ok(productDto);
     }
@@ -59,13 +59,13 @@ namespace Backend.Controllers
       return Ok(updatedProduct);
     }
 
-    // DELETE: api/products/{id}
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProduct(Guid id)
+    // DELETE: api/products/{productId}
+    [HttpDelete("{productId}")]
+    public async Task<IActionResult> DeleteProduct(Guid productId)
     {
-      var deleted = await _productService.Delete(id);
+      var deleted = await _productService.Delete(productId);
       // Return 404 if not found
-      if (!deleted) return NotFound($"Product with ID {id} not found.");
+      if (!deleted) return NotFound($"Product with ID {productId} not found.");
       // Return 204 No Content on successful deletion
       return NoContent();
     }

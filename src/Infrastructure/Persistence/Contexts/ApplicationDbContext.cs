@@ -12,6 +12,8 @@ namespace Backend.Infrastructure.Persistence.Contexts
     // Add DbSets for entities
     public DbSet<Product> Product { get; set; } = null!;
     public DbSet<Category> Category { get; set; } = null!;
+    public DbSet<Location> Location { get; set; } = null!;
+    public DbSet<InventoryEntry> InventoryEntry { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

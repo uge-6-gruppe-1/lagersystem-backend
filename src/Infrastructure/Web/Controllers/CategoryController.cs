@@ -9,10 +9,12 @@ namespace Backend.Controllers
   public class CategoryController : ControllerBase
   {
     private readonly ICategoryService _categoryService;
+    private readonly IProductService _productService;
 
-    public CategoryController(ICategoryService categoryService)
+    public CategoryController(ICategoryService categoryService, IProductService productService)
     {
       _categoryService = categoryService;
+      _productService = productService;
     }
 
     // GET: api/categories
@@ -23,13 +25,13 @@ namespace Backend.Controllers
       return Ok(categoryDtos);
     }
 
-    // GET: api/categories/{id}
-    [HttpGet("{id}")]
-    public async Task<ActionResult<CategoryDto>> GetCategory(Guid id)
+    // GET: api/categories/{categoryId}
+    [HttpGet("{categoryId}")]
+    public async Task<ActionResult<CategoryDto>> GetCategory(Guid categoryId)
     {
-      var categoryDto = await _categoryService.GetById(id);
+      var categoryDto = await _categoryService.GetById(categoryId);
       // Return 404 if not found
-      if (categoryDto == null) return NotFound($"Category with ID {id} not found.");
+      if (categoryDto == null) return NotFound($"Category with ID {categoryId} not found.");
       // Return 200 with category
       return Ok(categoryDto);
     }
@@ -58,44 +60,44 @@ namespace Backend.Controllers
       return Ok(updatedCategory);
     }
 
-    // DELETE: api/categories/{id}
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCategory(Guid id)
+    // DELETE: api/categories/{categoryId}
+    [HttpDelete("{categoryId}")]
+    public async Task<IActionResult> DeleteCategory(Guid categoryId)
     {
-      var deleted = await _categoryService.Delete(id);
+      var deleted = await _categoryService.Delete(categoryId);
       // Return 404 if not found
-      if (!deleted) return NotFound($"Category with ID {id} not found.");
+      if (!deleted) return NotFound($"Category with ID {categoryId} not found.");
       // Return 204 No Content on successful deletion
       return NoContent();
     }
 
-    // GET: api/categories/{id}/products
-    [HttpGet("{id}/products")]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory(Guid id)
+    // GET: api/categories/{categoryId}/products
+    [HttpGet("{categoryId}/products")]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory(Guid categoryId)
     {
-      var productDtos = await _categoryService.GetProductsByCategoryId(id);
+      var productDtos = await _productService.GetByCategoryId(categoryId);
       // Return 200 with products
       return Ok(productDtos);
     }
 
-    // PUT api/categories/{id}/products/{productId}
-    [HttpPut("{id}/products/{productId}")]
-    public async Task<ActionResult> AddProductToCategory(Guid id, Guid productId)
+    // PUT api/categories/{categoryId}/products/{productId}
+    [HttpPut("{categoryId}/products/{productId}")]
+    public async Task<ActionResult> AddProductToCategory(Guid categoryId, Guid productId)
     {
-      var result = await _categoryService.AddProductToCategory(id, productId);
+      var result = await _categoryService.AddProductToCategory(categoryId, productId);
       // Return 404 if category or product not found
-      if (!result) return NotFound($"Category with ID {id} or Product with ID {productId} not found.");
+      if (!result) return NotFound($"Category with ID {categoryId} or Product with ID {productId} not found.");
       // Return 204 No Content on successful addition
       return NoContent();
     }
 
-    // DELETE api/categories/{id}/products/{productId}
-    [HttpDelete("{id}/products/{productId}")]
-    public async Task<IActionResult> RemoveProductFromCategory(Guid id, Guid productId)
+    // DELETE api/categories/{categoryId}/products/{productId}
+    [HttpDelete("{categoryId}/products/{productId}")]
+    public async Task<IActionResult> RemoveProductFromCategory(Guid categoryId, Guid productId)
     {
-      var result = await _categoryService.RemoveProductFromCategory(id, productId);
+      var result = await _categoryService.RemoveProductFromCategory(categoryId, productId);
       // Return 404 if category or product not found
-      if (!result) return NotFound($"Category with ID {id} or Product with ID {productId} not found.");
+      if (!result) return NotFound($"Category with ID {categoryId} or Product with ID {productId} not found.");
       // Return 204 No Content on successful removal
       return NoContent();
     }
