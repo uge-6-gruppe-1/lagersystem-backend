@@ -112,7 +112,7 @@ namespace Backend.Infrastructure.Persistence.Repositories
 
         if (existingEntry == null)
         {
-          // Incrementing or setting a non-existing entry, create new entry with initial quantity 0
+          // Entry does not exist, create new entry with initial quantity 0
           existingEntry = new InventoryEntry
           {
             LocationId = locationId,

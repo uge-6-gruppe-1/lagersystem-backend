@@ -10,7 +10,6 @@ namespace Backend.Domain.Entities
     [Required]
     public string Name { get; set; } = string.Empty;
 
-    [Required]
-    public string PasswordHash { get; set; } = string.Empty;
+    public string? PasswordHash { get; set; } = string.Empty; // Todo: Make non-nullable when implementing authentication
   }
 }

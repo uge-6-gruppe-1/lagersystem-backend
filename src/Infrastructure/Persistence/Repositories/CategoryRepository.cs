@@ -68,11 +68,7 @@ namespace Backend.Infrastructure.Persistence.Repositories
     public async Task<bool> Delete(Guid id)
     {
       var category = await _context.Category.FindAsync(id);
-      if (category == null)
-      {
-        return false;
-      }
-
+      if (category == null) return false;
       _context.Category.Remove(category);
       await _context.SaveChangesAsync();
       return true;
