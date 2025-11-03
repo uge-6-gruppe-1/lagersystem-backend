@@ -36,6 +36,29 @@
         "${workspaceFolder}/lagersystem-backend.sln"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "${workspaceFolder}/lagersystem-backend.sln"
+      ],
+      "group": "test",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test-coverage",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "${workspaceFolder}/lagersystem-backend.sln",
+        "--collect:XPlat Code Coverage"
+      ],
+      "group": "test",
+      "problemMatcher": "$msCompile"
     }
   ]
 }
