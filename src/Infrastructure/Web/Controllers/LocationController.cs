@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Domain.Interfaces.Services;
 using Backend.Application.DTOs;
 
-namespace Backend.Controllers
+namespace Backend.Infrastructure.Web.Controllers
 {
   [ApiController]
   [Route("api/locations")]
