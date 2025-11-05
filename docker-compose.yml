@@ -39,14 +39,6 @@ services:
     networks:
       - ims_network
 
-  frontend:
-    image: ims_frontend:latest
-    container_name: ims_frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-
 volumes:
   ims_db_data:
 
